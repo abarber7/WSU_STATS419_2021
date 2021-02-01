@@ -1,79 +1,55 @@
 ---
 title: "helloFriend"
-author: "Monte J. Shaffer [monte_shaffer]"
-date: "CURRENT DATE/TIME FROM SYSTEM"
+author: "Antonio Barber [antonio_barber]"
+date: "1/31/2021"
 output: pdf_document
+
 ---
-
 ```{r}
-# name
-# wsu_id
-# TITLE
+# Antonio D. Barber
+# 0011551036
+# Hello Friend
 # IMAGE with CAPTION
-# 1500 words 
-
-
-```
-
-# Monte J. Shaffer
-
-## Growing up in Montana (Monte from Montana).
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+# 1500 words
 ```
 
 
+# Antonio D. Barber
+![My wife Samantha with me and our three boys: Blaze, Jett, and Gunner(2019)](C:/_git_/github/abarber7/WSU_STATS419_2021/workspace/hello-friend/graphics/family.png)
 
 
-```{r}
-# Cntrl-Shift I
+## Who you are?
+|      I am a family-oriented veteran college student and a volunteer community leader. I am a loving spouse and father who is driven to succeed by my family. I am a disabled Navy  veteran attending college by using my veteran’s education benefits. I am a volunteer basketball, baseball, and soccer head coach for all three of my son’s teams. Even though I am a veteran, a student, and a volunteer head coach, the most important thing to me is my family.
 
-education = function(who)
-  {
-  education = list();
-  education$who = who;
-  
-  education[["intelligence"]] = TRUE;
-  key = "nic";
-  education[[key]] = "awesome";
-  
-  # return(education);
-  education;
-  }
+|	     I am an African American male who is married to a half-Filipina and half-Portuguese female. Together we are an interracial couple, who have three interracial boys ages seven, five, and four. My parents, my three boys, and my wife are what motivates me to be successful in life. Most importantly, I want to set a good example for my boys and set them up financially for a better future than I had.
+
+|	     I joined the Navy with the intentions of getting out and taking advantage of the education benefits.  I am currently a student at Washington State University-Everett. I am concentrating my studies in software engineering  with a minor in mathematics. I have loved using computers and playing videos games for as long as I can remember. I have always had an interest in software and mathematics. My education and career goals align with what I am most interested in.
+
+|	     I have been a volunteer head coach in my community for  four years. I take pride in helping  young children understand the fundamentals of sports, and the importance of teamwork. I also help the children with their health, physical fitness, and listening skills. Also, I reinforce a positive male role model figure  for many of the children. I love coaching my children, but I also love helping other children grow as well.
+
+## Where you are
+|      I feel as if I am in a good place in life, and that I am headed to an even better place in the near future. I am a new homeowner, and a senior in my last year of school. My wife and I just purchased our first home together in September of 2020. 
+
+|	     My wife and I closed on a home last year, and it is a wonderful feeling to provide a home where my boys can run around in a yard and be kids. We no longer have to worry about upstairs, and downstairs neighbors complaining about the noise. We are very happy as a family to be in the home that we are in.
+
+|	     My wife and I did not even know that we could afford a house last year. We inquired about purchasing a home with my V.A. loan and to our surprise we qualified for more than we thought we would. We found out that our financial situation was better than we thought. We have zero debt, and a substantial amount in savings. We took advantage of the low interest rates and was able to close on a home in less than 30 days. Now we are proud homeowners. 
+
+## Why you are where you are.
+|      My father did not want me to follow in his footsteps, but instead he wanted me to earn my bachelor's degree so that my future would be better than his life. I now understand what my father meant by this. As a father, I want to earn my bachelor's degree so I can provide a better future and opportunities for my three sons. In my life I have had to rise up and overcome many personal hardships, educational challenges, as well as racial diversities while always keeping my goal of achieving a higher education a priority.
+
+|	     I was raised in a rough neighborhood in South Carolina. It was surrounded by poverty, police sirens, violence, and drug abuse. However, I never allowed my environment to stop me from reaching for my goals of attaining a higher education and working toward a better life for my family. I have been in advanced mathematics classes since I was in the fourth grade, and even to this day I help my family and friends with any math related problems. I used to tutor the basketball, football, and baseball teams that I played on in high school just to keep my teammates eligible. Even though my neighborhood was bad, I found satisfaction in the fact that I was able to give back, and that I was able to help. Receiving my bachelor's degree will put me in a better position to help my family and continue to give back to my community.
+
+|	     I originally went to college right after high school, but I was not ready financially. Quickly learning that I could not, at the time, sustain the costs of college ensuing high school I joined the U.S. Navy to take advantage of the G.I. Bill. I chose the job title of aviation electronics technician because this position aligned closest to my interest of electronics. My duties were to maintain and repair the more than thirty avionics systems onboard the P-3C Orion aircraft. These systems varied and included communication systems, navigational aids, detection systems, and weapons systems. I was a natural leader, and my problem-solving skills were a valuable asset to the Navy. This resulted in my quick promotion to Petty Officer Third Class within eight months of transferring to my squadron and full qualification of avionics technician work center supervisor. I applied my knowledge of electronics and mathematics for five years while I was in the U.S. Navy, and as a result I have sharpened my leadership skills, while gaining working experience through diversity.  I had an outstanding experience serving my country, but I knew that with my bachelor's degree I could do much more. After five years of service, I was ready to go back to school to continue on with my dream of receiving my bachelor's degree.
+
+|	     I was stationed in Oak Harbor, Washington and after I got out of the military I originally intended to move to Everett. I enrolled in Everett Community College, however I never moved to Everett because of financial reasons. I was making three-hour round-trip drives to Everett from where I lived in Oak Harbor five days a week. I have had multiple complications on that drive to and from school. I have had blown out tires and in one instance even ran out of gas a mile away from the school on the day of my final exam right in front of a gas station that does not sell gas. After two quarters at Everett Community College, I decided to enroll a little closer to home at Skagit Valley College. 
+
+|	     After two years at Skagit, I graduated with my Associates of Science in Physics/Engineering. My son was born the week before winter quarter finals. The labor lasted forty-six hours and had many complications. My son was born healthy but spending time with my family made it difficult to complete schoolwork. 
+
+|	     I was soon accepted into the University of Washington. I transferred to the University of Washington concentrating in mathematics. My family and I moved closer to Seattle and my wife gave birth to our second and third child while I was attending the University of Washington. It took me a while to be able to balance family life and school. I have always been a very family oriented individual. I came from a big family and I was now beginning my own. These events had a negative impact on my grades, but not my ultimate ambitions in life of furthering my education. I promised my father, myself, and my son that I will receive my bachelor's degree to create a better future for my family.  
+
+|	     I was not happy with being a math major, so I applied to Washington State University-Everett Software Engineering program. I was told that I needed to complete a few more prerequisites so I re-enrolled at Skagit Valley College. My family and I moved back to Oak Harbor and I attended Skagit Valley College for one year. After one year, I earned my second associate degree. Today, I am currently in my last year at Washington State University-Everett.
+
+##  Where you want to go
+|      I am expected to graduate in the Fall of 2021. Upon graduations, I would like to become a professional software engineer who gives back to the community. I care for everyone and I really want to help the less fortunate and anyone who cannot help themselves. I want to be a become a business owner and/or a supervisor.  I am sure that my previous experiences in the military will help me in my professional life because I know how to be a leader, as well as work in diverse groups to achieve a common goal. I believe  that Washington State University will help me become the first person in my family to receive my bachelor's degree. I want my Washington State University software engineering degree to help me create a better future for my three boys, even if they do not want to follow in my shoes.
 
 
-```
-
-
-```{r}
-x = education("monte");
-str(x);
-
-x$who = "alex";
-x[["nic"]] = "totally";
-str(x);
-
-```
-
-
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
