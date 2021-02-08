@@ -1,0 +1,2 @@
+draft.txt information was found on February 7, 2020 at https://www.loc.gov/exhibits/declara/ruffdrft.html
+orginal.txt information was found on February 7, 2020 at https://www.archives.gov/founding-docs/declaration-transcript
