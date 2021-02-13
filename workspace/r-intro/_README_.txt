@@ -18,3 +18,6 @@ EASTER EGG (10 points): post code that would take the two text inputs (original.
 
 # DELIVERABLE:  Create a RStudio "intro.Rmd" ... notebook [VERBOSE ... descriptive] ... functions-intro.R ... github (notebook) ... 
 
+Create a folder in your github/datasets/ called "declaration" and therein, include "draft.txt" and "final.txt" and "_README_.txt" where the last file has some basic information about where the data was found, and when (e.g., on this data, this URL)
+
+
