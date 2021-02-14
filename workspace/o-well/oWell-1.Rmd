@@ -5,7 +5,13 @@ output:
   html_document:
     df_print: paged
 ---
-
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
 ```{r}
 # github.monte
 which.github = "local";  # local ... remote 
@@ -44,6 +50,16 @@ print(owell.chemistry)
 ```
 
 # Appending Wells Location to owell.metals and owell.chemistry dataframes
-```{r my-chunk, R.options = list(width = 1000)}
+```{r my-chunk2, R.options = list(width = 1000)}
+path.wellLocation = paste0(mypath, "dataset/")
+wellLocation = read.table(paste0(path.wellLocation, "wells-location.txt"), sep = "|"); # read in the data from wells location txt file
+names(wellLocation) <- wellLocation[1,] # take first row and set them as column headers
+wellLocation = wellLocation[-c(1),] # remove the first row
+rownames(wellLocation) = NULL # renumbering rows
+
+owell.metals <- cbind.data.frame(owell.metals, wellLocation) #appends the two data frames
+owell.chemistry <- cbind.data.frame(owell.chemistry, wellLocation) #appends the two data frames
+print(owell.metals)
+print(owell.chemistry)
 
 ```
