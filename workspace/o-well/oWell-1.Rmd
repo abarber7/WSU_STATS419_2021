@@ -61,5 +61,32 @@ owell.metals <- cbind.data.frame(owell.metals, wellLocation) #appends the two da
 owell.chemistry <- cbind.data.frame(owell.chemistry, wellLocation) #appends the two data frames
 print(owell.metals)
 print(owell.chemistry)
+```
 
+# Appending fault to each data frame
+```{r my-chunk3, R.options = list(width = 1000)}
+path.faultLocation = paste0(mypath, "dataset/")
+faultLocation = read.table(paste0(path.faultLocation, "fault.txt"), ); # read in the data from wells location txt file
+names(faultLocation) <- faultLocation[1,] # take first row and set them as column headers
+faultLocation = faultLocation[-c(1),] # remove the first row
+rownames(fault) = NULL # renumbering rows
+print(faultLocation)
+owell.metals <- cbind.data.frame(owell.metals, faultLocation) #appends the two data frames
+owell.chemistry <- cbind.data.frame(owell.chemistry, faultLocation) #appends the two data frames
+print(owell.metals)
+print(owell.chemistry)
+```
+
+# Appending geology to each data frame
+```{r my-chunk4, R.options = list(width = 1000)}
+path.geology = paste0(mypath, "dataset/")
+geology = read.table(paste0(path.geology, "geology.txt"), ); # read in the data from wells location txt file
+names(geology) <- geology[1,] # take first row and set them as column headers
+geology = geology[-c(1),] # remove the first row
+rownames(geology) = NULL # renumbering rows
+print(geology)
+owell.metals <- cbind.data.frame(owell.metals, geology) #appends the two data frames
+owell.chemistry <- cbind.data.frame(owell.chemistry, geology) #appends the two data frames
+print(owell.metals)
+print(owell.chemistry)
 ```
