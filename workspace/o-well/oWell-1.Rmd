@@ -32,15 +32,15 @@ if(which.github == "remote")
 library(tabulizer)
 path.data = paste0(mypath, "dataset/")
 pdf.file = paste0(path.data, "Well-23.pdf");
-pdf.dat = extract_tables(pdf.file);
+table_12 = extract_tables(pdf.file);
 
-owell.metals = data.frame(pdf.dat[1]) # read in first table from pdf
+owell.metals = data.frame(table_12[1]) # read in first table from pdf
 names(owell.metals) <- owell.metals[1,] # take first row and set them as column headers
 owell.metals <- owell.metals[-1] # delete the first column from table
 owell.metals = owell.metals[-c(1,2,26,27,28,29,30,31),] # remove these rows
 rownames(owell.metals) = NULL # renumbering rows
 
-owell.chemistry = data.frame(pdf.dat[2]) # read in second table from pdf
+owell.chemistry = data.frame(table_12[2]) # read in second table from pdf
 names(owell.chemistry) <- owell.chemistry[1,] # take first row and set them as column headers
 owell.chemistry <- owell.chemistry[-1] # delete the first column from table
 owell.chemistry = owell.chemistry[-c(1,2,20 ,21, 22, 23, 29, 30, 31, 32),] # remove these rows
@@ -65,14 +65,13 @@ print(owell.chemistry)
 
 # Appending fault to each data frame
 ```{r my-chunk3, R.options = list(width = 1000)}
-path.faultLocation = paste0(mypath, "dataset/")
-faultLocation = read.table(paste0(path.faultLocation, "fault.txt"), ); # read in the data from wells location txt file
-names(faultLocation) <- faultLocation[1,] # take first row and set them as column headers
-faultLocation = faultLocation[-c(1),] # remove the first row
-rownames(fault) = NULL # renumbering rows
-print(faultLocation)
-owell.metals <- cbind.data.frame(owell.metals, faultLocation) #appends the two data frames
-owell.chemistry <- cbind.data.frame(owell.chemistry, faultLocation) #appends the two data frames
+path.fault.m = paste0(mypath, "dataset/")
+fault.m = read.table(paste0(path.fault.m, "fault.txt"), ); # read in the data from wells location txt file
+names(fault.m) <- fault.m[1,] # take first row and set it as column headers
+fault.m = fault.m[-c(1),] # remove the first row
+
+owell.metals <- cbind.data.frame(owell.metals, fault.m) #appends the two data frames
+owell.chemistry <- cbind.data.frame(owell.chemistry, fault.m) #appends the two data frames
 print(owell.metals)
 print(owell.chemistry)
 ```
@@ -80,13 +79,21 @@ print(owell.chemistry)
 # Appending geology to each data frame
 ```{r my-chunk4, R.options = list(width = 1000)}
 path.geology = paste0(mypath, "dataset/")
-geology = read.table(paste0(path.geology, "geology.txt"), ); # read in the data from wells location txt file
-names(geology) <- geology[1,] # take first row and set them as column headers
+geology = read.table(paste0(path.geology, "geology.txt"),sep = '\n' ); # read in the data from wells location txt file
+names(geology) <- geology[1,] # take first row and set it as column headers
 geology = geology[-c(1),] # remove the first row
 rownames(geology) = NULL # renumbering rows
-print(geology)
+
 owell.metals <- cbind.data.frame(owell.metals, geology) #appends the two data frames
 owell.chemistry <- cbind.data.frame(owell.chemistry, geology) #appends the two data frames
 print(owell.metals)
 print(owell.chemistry)
+```
+
+# Create a list with these two dataframes and save to rds file
+```{r my-chunk5, R.options = list(width = 1000)}
+listOfDataframe  = list("wells$saudi$chemistry"=owell.chemistry,"wells$saudi$chemistry"=owell.metals)
+print(listOfDataframe)
+saveRDS(listOfDataframe, file ="wells.rds")
+readRDS(file = "wells.rds")
 ```
