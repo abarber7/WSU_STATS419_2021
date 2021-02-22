@@ -1,5 +1,5 @@
 ---
-title: ' o-well assignment #1'
+title: ' o-well assignment # 2'
 author: "Antonio Barber [antonio_barber]"
 output:
   html_document:
@@ -28,17 +28,118 @@ if(which.github == "remote")
 ```
 
 # Read in the data
+I will read in a list of dataframes from a RDS file. Then I will assign each dataframe to a variable.
 ```{r my-chunk, R.options = list(width = 1000)}
-library(tabulizer)
-path.data = paste0(mypath, "o-well/wells.rds")
-rds.file= paste0(path.data, "wells.rds");
 
-download.file(path.data, "wells.rds", method="curl")
-myRDS <- readRDS("wells.rds")
+readInWells = readRDS(url("https://raw.githubusercontent.com/abarber7/WSU_STATS419_2021/main/workspace/o-well/wells.rds"))
+owell.metals = readInWells[["wells$saudi$metals"]]
+owell.chemistry = readInWells[["wells$saudi$chemistry"]]
 
-print(myRDS)
-
-
-
+print(owell.chemistry)
+print(owell.metals)
 
 ```
+
+
+# Summary of Metals
+This summary statistics of the metals table include:
+the median,
+the mean,
+the standard error on the mean (SE.mean),
+the confidence interval of the mean (CI.mean) at the p level (default is 0.95),
+the variance (var),
+the standard deviation (std.dev),
+and the variation coefficient (coef.var) defined as the standard deviation divided by the mean.
+```{r}
+library(pastecs)
+metals = owell.metals[c(1:23), -c(16,17,18,19,20,21)]
+
+dat <- as.data.frame(sapply(metals, as.numeric))
+
+res <- stat.desc(dat[, -5])
+round(res, 2)
+```
+
+# Summary of Chemistry
+This summary statistics of the Chemistry table include:
+the median,
+the mean,
+the standard error on the mean (SE.mean),
+the confidence interval of the mean (CI.mean) at the p level (default is 0.95),
+the variance (var),
+the standard deviation (std.dev),
+and the variation coefficient (coef.var) defined as the standard deviation divided by the mean.
+```{r}
+library(pastecs)
+chemistry = owell.chemistry[c(1:23), -c(21, 22, 23, 24, 25, 26)]
+
+dat2 <- as.data.frame(sapply(chemistry, as.numeric))
+
+res <- stat.desc(dat2[, -5])
+round(res, 2)
+```
+
+# Extracting data from the metal Tables
+This graph shows the level of all the different metals in μg/L throughout all 23 wells.
+```{r}
+library(pastecs)
+metals = owell.metals[c(1:23), -c(16,17,18,19,20,21)]
+mypalette = rainbow(ncol(metals))
+matplot(y = metals, type = 'l', lty = 1, col = mypalette)
+legend(legend = colnames(metals), x = "topright", y = "topright", lty = 1, lwd = 2, col = mypalette)
+```
+
+# Extracting data from the chemistry Tables
+This graph shows the level of all the different chemicals in mg/L throughout all 23 wells.
+```{r}
+library(pastecs)
+chemistry = owell.chemistry[c(1:23), -c(21, 22, 23, 24, 25, 26)]
+mypalette2 = rainbow(ncol(chemistry))
+
+matplot(y = chemistry, type = 'l', lty = 1, col = mypalette2)
+legend(legend = colnames(chemistry), x = "topright", y = "topright", lty = 1, lwd = 1, col = mypalette2)
+
+```
+
+
+# Boxplot of the metals
+This  graph is a boxplot that compares and displays the concentration levels of each of the metals in the 23 wells.
+```{r}
+library(ggpubr)
+metals = owell.metals[c(1:23), -c(16, 17,18,19,20,21)]
+dat <- as.data.frame(sapply(metals, as.numeric))
+
+boxplot(dat,xlab = "Metals", ylab = "μg/L", las =2,cex.names=.75)
+```
+
+# Boxplot of the chemicals
+This graph  is a boxplot that compares and displays the concentration levels of each of the chemicals in all of the wells.
+```{r}
+chemistry = owell.chemistry[c(1:23), -c(21, 22, 23, 24, 25, 26)]
+dat2 <- as.data.frame(sapply(chemistry, as.numeric))
+
+boxplot(dat2,xlab = "Chemicals", ylab = "mg/L", las =2,cex.names=.75)
+```
+
+# Examination of Barium in the wells
+When looking at the figures for the amount of metals in the wells, I noticed that Ba(Barium) has the highest median value and outlier than all of the other metals. Barium has been proven to be toxic to humans in high concentration levels. In this section I want to observe which wells had the highest concentration, and to see if there is a correlation to the geology of the surrounding area. It would appear that there is evidence to support the assumption that the geology sand may have a correlation for the high amounts of Barium in the wells. However, there is not enough evidence to conclude that assumption.
+```{r}
+library(ggpubr)
+with(owell.metals,plot(well, Ba))
+p <- ggstripchart(owell.metals, x = "Ba", y = "geology",
+          color = "geology",
+          add = "mean_sd")
+p + rotate_x_text()
+```
+
+# Examination of Tennessine in the wells
+When looking at the figures for the amount of chemicals in the wells, I noticed that Ts(Tennessine) has the highest median value and outlier than all of the other chemicals.Tennessine is considered harmful due to its radioactivity. Tennessine is a synthetic radioactive metal and has only been produced in minute amounts. In this section I want to observe which wells had the highest concentration, and to see if there is a correlation to the geology of the surrounding area. It would appear that there is enough evidence to support the assumption that the geology sand may have a correlation for the high amounts of Tennessine in the wells.  However, there is not enough evidence to conclude that assumption.
+```{r}
+library(ggpubr)
+with(owell.chemistry,plot(well, TS))
+p <- ggstripchart(owell.chemistry, x = "TS", y = "geology",
+          color = "geology",
+          add = "mean_sd")
+p + rotate_x_text()
+```
+
