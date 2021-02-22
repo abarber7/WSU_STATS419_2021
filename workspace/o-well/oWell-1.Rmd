@@ -92,7 +92,7 @@ print(owell.chemistry)
 
 # Create a list with these two dataframes and save to rds file
 ```{r my-chunk5, R.options = list(width = 1000)}
-listOfDataframe  = list("wells$saudi$chemistry"=owell.chemistry,"wells$saudi$chemistry"=owell.metals)
+listOfDataframe  = list("wells$saudi$chemistry"=owell.chemistry,"wells$saudi$metals"=owell.metals)
 print(listOfDataframe)
 saveRDS(listOfDataframe, file ="wells.rds")
 readRDS(file = "wells.rds")

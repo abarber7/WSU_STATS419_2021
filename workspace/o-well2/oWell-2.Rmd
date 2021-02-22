@@ -1,0 +1,44 @@
+---
+title: ' o-well assignment #1'
+author: "Antonio Barber [antonio_barber]"
+output:
+  html_document:
+    df_print: paged
+---
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+```{r}
+# github.monte
+which.github = "local";  # local ... remote 
+
+github.local = "C:/_git_/github/abarber7/WSU_STATS419_2021/workspace/o-well";
+github.remote = "https://raw.githubusercontent.com/abarber7/WSU_STATS419_2021/main";
+
+if(which.github == "remote")
+  {
+  mypath = paste0(github.remote,"/workspace/")
+  } else {
+           mypath = paste0(github.remote,"/workspace/")
+          }
+```
+
+# Read in the data
+```{r my-chunk, R.options = list(width = 1000)}
+library(tabulizer)
+path.data = paste0(mypath, "o-well/wells.rds")
+rds.file= paste0(path.data, "wells.rds");
+
+download.file(path.data, "wells.rds", method="curl")
+myRDS <- readRDS("wells.rds")
+
+print(myRDS)
+
+
+
+
+```
