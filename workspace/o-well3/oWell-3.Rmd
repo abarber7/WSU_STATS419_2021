@@ -1,0 +1,219 @@
+---
+title: ' o-well assignment # 3'
+author: "Antonio Barber [antonio_barber]"
+output:
+  html_document:
+    df_print: paged
+---
+<style type="text/css">
+.main-container {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+```{r}
+# github.monte
+which.github = "local";  # local ... remote 
+
+github.local = "C:/_git_/github/abarber7/WSU_STATS419_2021/workspace/o-well";
+github.remote = "https://raw.githubusercontent.com/abarber7/WSU_STATS419_2021/main";
+
+if(which.github == "remote")
+  {
+  mypath = paste0(github.remote,"/workspace/")
+  } else {
+           mypath = paste0(github.remote,"/workspace/")
+          }
+```
+
+# Read in the data
+I will read in a list of dataframes from a RDS file. Then I will assign each dataframe to a variable.
+```{r my-chunk, R.options = list(width = 1000)}
+
+readInWells = readRDS(url("https://raw.githubusercontent.com/abarber7/WSU_STATS419_2021/main/workspace/o-well/wells.rds"))
+owell.metals = readInWells[["wells$saudi$metals"]]
+owell.chemistry = readInWells[["wells$saudi$chemistry"]]
+
+print(owell.chemistry)
+print(owell.metals)
+
+```
+
+
+# Summary of Metals
+This summary statistics of the metals table include:
+the median,
+the mean,
+the standard error on the mean (SE.mean),
+the confidence interval of the mean (CI.mean) at the p level (default is 0.95),
+the variance (var),
+the standard deviation (std.dev),
+and the variation coefficient (coef.var) defined as the standard deviation divided by the mean.
+```{r}
+library(pastecs)
+metals = owell.metals[c(1:23), -c(21)]
+
+dat <- as.data.frame(sapply(metals, as.numeric))
+
+res <- stat.desc(dat[, -5])
+round(res, 2)
+```
+
+# Summary of Chemistry
+This summary statistics of the Chemistry table include:
+the median,
+the mean,
+the standard error on the mean (SE.mean),
+the confidence interval of the mean (CI.mean) at the p level (default is 0.95),
+the variance (var),
+the standard deviation (std.dev),
+and the variation coefficient (coef.var) defined as the standard deviation divided by the mean.
+```{r}
+library(pastecs)
+chemistry = owell.chemistry[c(1:23), -c(26)]
+
+dat2 <- as.data.frame(sapply(chemistry, as.numeric))
+
+res <- stat.desc(dat2[, -5])
+round(res, 2)
+```
+
+# Extracting data from the metal Tables
+This graph shows the level of all the different metals in μg/L throughout all 23 wells.
+```{r}
+library(pastecs)
+metals = owell.metals[c(1:23), -c(16,17,18,19,20,21)]
+mypalette = rainbow(ncol(metals))
+matplot(y = metals, type = 'l', lty = 1, col = mypalette)
+legend(legend = colnames(metals), x = 22.1, y = 105, lty = 1, lwd = 2, col = mypalette, xpd = TRUE, )
+
+```
+
+# Extracting data from the chemistry Tables
+This graph shows the level of all the different chemicals in mg/L throughout all 23 wells.
+```{r}
+library(pastecs)
+chemistry = owell.chemistry[c(1:23), -c(21, 22, 23, 24, 25, 26)]
+mypalette2 = rainbow(ncol(chemistry))
+
+matplot(y = chemistry, type = 'l', lty = 1, col = mypalette2)
+legend(legend = colnames(chemistry), x = 21.4, y = 15000, lty = 1, lwd = 1, col = mypalette2, xpd = TRUE)
+
+```
+
+
+# Boxplot of the metals
+This  graph is a boxplot that compares and displays the concentration levels of each of the metals in the 23 wells.
+```{r}
+library(ggpubr)
+metals = owell.metals[c(1:23), -c(16, 17,18,19,20,21)]
+dat <- as.data.frame(sapply(metals, as.numeric))
+
+boxplot(dat,xlab = "Metals", ylab = "μg/L", las =2,cex.names=.75)
+```
+
+# Boxplot of the chemicals
+This graph  is a boxplot that compares and displays the concentration levels of each of the chemicals in all of the wells.
+```{r}
+chemistry = owell.chemistry[c(1:23), -c(21, 22, 23, 24, 25, 26)]
+dat2 <- as.data.frame(sapply(chemistry, as.numeric))
+
+boxplot(dat2,xlab = "Chemicals", ylab = "mg/L", las =2,cex.names=.75)
+```
+
+# Examination of Barium in the wells
+When looking at the figures for the amount of metals in the wells, I noticed that Ba(Barium) has the highest median value and outlier than all of the other metals. Barium has been proven to be toxic to humans in high concentration levels. In this section I want to observe which wells had the highest concentration, and to see if there is a correlation to the geology of the surrounding area. It would appear that there is evidence to support the assumption that the geology sand may have a correlation for the high amounts of Barium in the wells. However, there is not enough evidence to conclude that assumption.
+```{r}
+library(ggpubr)
+with(owell.metals,plot(well, Ba))
+p <- ggstripchart(owell.metals, x = "Ba", y = "geology",
+          color = "geology",
+          add = "mean_sd")
+p + rotate_x_text()
+```
+
+# Examination of Tennessine in the wells
+When looking at the figures for the amount of chemicals in the wells, I noticed that Ts(Tennessine) has the highest median value and outlier than all of the other chemicals.Tennessine is considered harmful due to its radioactivity. Tennessine is a synthetic radioactive metal and has only been produced in minute amounts. In this section I want to observe which wells had the highest concentration, and to see if there is a correlation to the geology of the surrounding area. It would appear that there is enough evidence to support the assumption that the geology sand may have a correlation for the high amounts of Tennessine in the wells.  However, there is not enough evidence to conclude that assumption.
+```{r}
+library(ggpubr)
+with(owell.chemistry,plot(well, TS))
+p <- ggstripchart(owell.chemistry, x = "TS", y = "geology",
+          color = "geology",
+          add = "mean_sd")
+p + rotate_x_text()
+```
+
+# Graph and Correlation between Ph Levels and distance to fault
+```{r}
+library(ggplot2)
+chemistry = owell.chemistry[c(1:23), -c( 26)]
+dat2 <- as.data.frame(sapply(chemistry, as.numeric))
+ggplot(dat2, aes(x=pH, y=fault.m))+geom_point()+theme(axis.text.x=element_text(angle=90))+ggtitle("Scatter Plot Comparing pH Level to Distance from the Fault")+(theme(plot.title = element_text(hjust = 0.5)))
+
+ggboxplot( dat2, x = "pH", y = "fault.m", add="dotplot", width = 0.9)+ggtitle("Boxplot Comparing pH Level to Distance from the Fault")+(theme(plot.title = element_text(hjust = 0.5)))
+
+
+cor(dat2$pH,dat2$fault.m)
+```
+
+# Graph Correlation between pH and Altitude
+```{r}
+chemistry = owell.chemistry[c(1:23), -c( 26)]
+dat2 <- as.data.frame(sapply(chemistry, as.numeric))
+
+ggplot(dat2, aes(x=pH, y=altitude.ft))+geom_point()+theme(axis.text.x=element_text(angle=90))+ggtitle("Scatter Plot Comparing pH Level to Altitude in feet")+(theme(plot.title = element_text(hjust = 0.5)))
+
+ggboxplot( dat2, x = "pH", y = "altitude.ft", add="dotplot", width = 0.9)+ggtitle("Boxplot Comparing pH Level to Altitude in feet")+(theme(plot.title = element_text(hjust = 0.5)))
+
+
+cor(dat2$pH,dat2$altitude.ft)
+```
+
+# Graph of altitude and metals in water
+This  graph Shows the metal concentration in the 23 well by altitude.
+```{r}
+library(ggpubr)
+metals = owell.metals[c(1:23), -c(16,17,18,19,20,21)]
+mypalette = rainbow(ncol(metals))
+matplot(x= owell.metals$altitude.ft, y = metals, type = 'l', lty = 1, col = mypalette)
+legend(legend = colnames(metals), x = 3000, y = 110, lty = 1, lwd = 1, col = mypalette2, xpd = TRUE, 
+       )
+```
+
+# Graph of altitude and chemicals in water
+This  graph Shows the chemical concentration in the 23 well by altitude.
+```{r}
+library(ggpubr)
+chemistry = owell.chemistry[c(1:23), -c(21, 22, 23,24, 25, 26)]
+mypalette2 = rainbow(ncol(chemistry))
+
+matplot(x = owell.chemistry$altitude.ft, y = chemistry, type = 'l', lty = 1, col = mypalette2)
+legend(legend = colnames(chemistry), x = 2900, y = 14000, lty = 1, lwd = 1, col = mypalette2, xpd = TRUE, 
+       )
+```
+
+# Graph of distance to fault and metals in water
+This  graph Shows the metal concentration in the 23 well by distance to fault.
+```{r}
+library(ggpubr)
+metals = owell.metals[c(1:23), -c(16,17,18,19,20,21)]
+mypalette = rainbow(ncol(metals))
+matplot(x= owell.metals$fault.m, y = metals, type = 'l', lty = 1, col = mypalette)
+legend(legend = colnames(metals), x = 3000, y = 110, lty = 1, lwd = 1, col = mypalette2, xpd = TRUE, 
+       )
+```
+
+# Graph of distance to fault and chemicals in water
+This  graph Shows the chemical concentration in the 23 well by distance to fault.
+```{r}
+library(ggpubr)
+chemistry = owell.chemistry[c(1:23), -c(21, 22, 23,24, 25, 26)]
+mypalette2 = rainbow(ncol(chemistry))
+
+matplot(x = owell.chemistry$fault.m, y = chemistry, type = 'l', lty = 1, col = mypalette2)
+legend(legend = colnames(chemistry), x = 2900, y = 14000, lty = 1, lwd = 1, col = mypalette2, xpd = TRUE, 
+       )
+```
+
+
