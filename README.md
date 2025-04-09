@@ -45,5 +45,15 @@ To run any of the R scripts:
 ## 📂 Repository Structure
 
 ```bash
-<pre lang="markdown"> ```plaintext WSU_STATS419_2021/ ├── Labs/ # Weekly lab exercises and scripts │ ├── Lab1.R │ ├── Lab2.R │ └── ... ├── Assignments/ # Homework and written assignments │ ├── HW1.pdf │ ├── HW2.pdf │ └── ... ├── Final_Project/ # Final data mining project │ ├── project_report.pdf │ ├── project_code.R │ └── dataset.csv └── README.md # You're here! ``` </pre>
+WSU_STATS419_2021/
+├── Labs/ # Weekly lab exercises and scripts │
+├── Lab1.R │
+├── Lab2.R │ └── ...
+├── Assignments/ # Homework and written assignments │
+├── HW1.pdf │
+├── HW2.pdf │ └── ...
+├── Final_Project/ # Final data mining project │
+├── project_report.pdf │
+├── project_code.R │ └── dataset.csv
+├── README.md # You're here!
 
